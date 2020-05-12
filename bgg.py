@@ -1,14 +1,3 @@
-'''
-Available rankings :
-Overall
-Thematic
-Strategy
-War
-Customizable
-Abstract
-Family
-Party
-'''
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
@@ -62,14 +51,14 @@ class GameList:
 
     def save(self, filename):
         df = pd.DataFrame(self.games)
+        df = df.set_index('gameid')
         df.to_csv(filename)
     
     def update(self, filename):
         pass
 
-
 if __name__ == '__main__':
     gamelist = GameList('strategy')
-    gamelist.getgames(threshold=7, page=1)
-    print(gamelist.games)
+    gamelist.getgames(threshold=7, page=4)
+    gamelist.save('./p4.csv')
 
